@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<xs:schema targetNamespace="http://www.factor.kz/resources/test/simpletype" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.factor.kz/resources/test/simpletype"
+>
+
+    <xs:simpleType name="LatestVersionType">
+        <xs:annotation>
+            <xs:documentation>Статус последней версии.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="Not_latest_version"/>
+            <xs:enumeration value="Latest_version"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodeType">
+        <xs:annotation>
+            <xs:documentation>CodeType является типом для описания кодов экземпляров сущностей.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-z0-9_\-]+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ValidateEmail">
+        <xs:annotation>
+            <xs:documentation>Тип осуществляющий проверку на валидность адреса электронной почты.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Za-z0-9_]+([-+.'][A-Za-z0-9_]+)*@[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*\.[A-Za-z0-9_]+([-.][A-Za-z0-9_]+)*"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ValidatePhone">
+        <xs:annotation>
+            <xs:documentation>Тип осуществляющий проверку на валидность номера телефона/факса.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\+7\(\d{3}\)\d{7}"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ValidateDate">
+        <xs:annotation>
+            <xs:documentation>Тип определяющий формат даты. Формат имеет вид дд.мм.гггг</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{2}.\d{2}.\d{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="UpdateType">
+        <xs:annotation>
+            <xs:documentation>Состояние экземпляров сущностей.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_Add"/>
+            <xs:enumeration value="_Upd"/>
+            <xs:enumeration value="_Del"/>
+            <xs:enumeration value="_not"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="OwnerStructureType">
+        <xs:annotation>
+            <xs:documentation>Тип структуры владельца</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="Simple_owner"></xs:enumeration>
+            <xs:enumeration value="Multidimensional_owner"></xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PropertyValueTypeType">
+        <xs:annotation>
+            <xs:documentation>Словарь - тип значений атрибутивного свойства</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_ValueofMask"/>
+            <xs:enumeration value="_Boolean">
+                <xs:annotation>
+                    <xs:documentation>Логическая константа.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="_URI">
+                <xs:annotation>
+                    <xs:documentation>URI адрес.</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="_Date"/>
+            <xs:enumeration value="_Time"/>
+            <xs:enumeration value="_DateTime"/>
+            <xs:enumeration value="_String"/>
+            <xs:enumeration value="_MultiLine_text"/>
+            <xs:enumeration value="_File"/>
+            <xs:enumeration value="_XML_file"/>
+            <xs:enumeration value="_Image"/>
+            <xs:enumeration value="_Audio_file"/>
+            <xs:enumeration value="_Video_file"/>
+            <xs:enumeration value="_Complex_property"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PropertyRefValueTypeType">
+        <xs:annotation>
+            <xs:documentation>Словарь - тип значения ссылочного свойства.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_Owner"/>
+            <xs:enumeration value="_OwnerType"/>
+            <xs:enumeration value="_FactorVal"/>
+            <xs:enumeration value="_Measure"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PropertyMeterValueTypeType">
+        <xs:annotation>
+            <xs:documentation>Словарь - тип значения числового свойства.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_Integer"/>
+            <xs:enumeration value="_Long"/>
+            <xs:enumeration value="_Double"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PropertyStructureType">
+        <xs:annotation>
+            <xs:documentation>Словарь - тип структуры свойства</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="Simple_property"/>
+            <xs:enumeration value="Hierarchy_property"/>
+            <xs:enumeration value="Multidimensional_property"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PropertyValDependPeriodType">
+        <xs:annotation>
+            <xs:documentation>Зависимость значения свойства от периода.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_depend"/>
+            <xs:enumeration value="_not_depend"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="isUniqueType">
+        <xs:annotation>
+            <xs:documentation>Однозначность значения свойства.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_unique"/>
+            <xs:enumeration value="_not_unique"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PeriodTypeType">
+        <xs:annotation>
+            <xs:documentation>Приведенные перечисления являются встроенными кодами типов периодов в любом
+                синхронизаторе. Наименования типов периодов на разных языках определяются в каждом синхронизаторе
+                самостоятельно.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_year"/>
+            <xs:enumeration value="_half-year"/>
+            <xs:enumeration value="_quarter"/>
+            <xs:enumeration value="_nine_months"/>
+            <xs:enumeration value="_month"/>
+            <xs:enumeration value="_ten_day"/>
+            <xs:enumeration value="_week"/>
+            <xs:enumeration value="_day"/>
+            <xs:enumeration value="_hour"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CodingSystemTypeType">
+        <xs:annotation>
+            <xs:documentation>Словарь - тип системы кодирования</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="CodeType">
+            <xs:enumeration value="_registration">
+                <xs:annotation>
+                    <xs:documentation>Регистрационная система кодирования</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="_Hierarchical">
+                <xs:annotation>
+                    <xs:documentation>Иерархическая система кодирования</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="_facet">
+                <xs:annotation>
+                    <xs:documentation>Фасетная система кодирования</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="KFromBaseType">
+        <xs:annotation>
+            <xs:documentation>Тип описывающий коэффициент перевода из базовой единицы измерения в производную единицу
+                измерения.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:float">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="VersionNumberType">
+        <xs:annotation>
+            <xs:documentation>Шаблон номера версии.</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]+(\.[0-9]+)*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TextType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute ref="lang" default="ru"></xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:attribute name="lang">
+        <xs:annotation>
+            <xs:documentation>Attempting to install the relevant ISO 2- and 3-letter
+                codes as the enumerated possible values is probably never
+                going to be a realistic possibility.  See
+                RFC 3066 at http://www.ietf.org/rfc/rfc3066.txt and the IANA registry
+                at http://www.iana.org/assignments/lang-tag-apps.htm for
+                further information.
+
+                The union allows for the 'un-declaration' of xml:lang with
+                the empty string.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:union memberTypes="xs:language">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value=""/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:union>
+        </xs:simpleType>
+    </xs:attribute>
+
+</xs:schema>
